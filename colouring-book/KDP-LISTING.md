@@ -65,7 +65,20 @@ Then click **Launch Previewer** and flick through every page before approving.
 
 - **Territories:** All territories (worldwide).
 - **Marketplace:** Amazon.co.uk (or your main one).
-- **Suggested price:** **£5.99**, or $6.99 on Amazon.com. KDP shows the printing cost and your royalty as you type the price. Keep the royalty above about £1.50.
+- **Prices per marketplace:** set each one yourself. Don't tick "base on Amazon.com price", because converted prices can land just under the 60% royalty line.
+
+| Marketplace | Price to enter |
+|---|---|
+| Amazon.com (USD) | 9.99 |
+| Amazon.co.uk (GBP) | 7.99 |
+| Amazon.de / .fr / .es / .it / .nl / .be (EUR) | 9.99 each |
+| Amazon.pl (PLN) | 41.99 |
+| Amazon.se (SEK) | 119 |
+| Amazon.co.jp (JPY) | 1,200 |
+| Amazon.ca (CAD) | 13.99 |
+| Amazon.com.au (AUD) | 13.99 |
+
+  These sit at or just above Amazon's 60% royalty line (below it you only get 50%). Check that the royalty KDP shows beside each price is positive.
 - **Expanded distribution:** optional. It reaches bookshops and libraries, but pays a lower royalty.
 
 ## Checks already done on these files
