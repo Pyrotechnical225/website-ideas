@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2419">
+<title>Oakline Studio — Your ideas, your canvas</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/vendor/grapes.min.css">
+<link rel="stylesheet" href="/creator.css">
+<script src="/vendor/purify.min.js" defer></script>
+<script src="/vendor/grapes.min.js" defer></script>
+<script src="/creator.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="Oakline homepage"><span class="brand-mark" aria-hidden="true"></span>oakline<small>studio</small></a>
+  <div class="project">
+    <input id="project-name" aria-label="Website name" value="Untitled website" maxlength="80">
+    <span id="save-status" class="save-status" role="status">Not started</span>
+  </div>
+  <div class="top-actions">
+    <div class="btn-group">
+      <button id="undo" class="icon-btn" aria-label="Undo (Ctrl+Z)" title="Undo (Ctrl+Z)" disabled>↶</button>
+      <button id="redo" class="icon-btn" aria-label="Redo (Ctrl+Shift+Z)" title="Redo (Ctrl+Shift+Z)" disabled>↷</button>
+    </div>
+    <div class="devices" role="group" aria-label="Preview width">
+      <button data-device="Desktop" aria-pressed="true" title="Desktop"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span class="sr-only">Desktop</span></button>
+      <button data-device="Tablet" aria-pressed="false" title="Tablet"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M11 18h2"/></svg><span class="sr-only">Tablet</span></button>
+      <button data-device="Mobile" aria-pressed="false" title="Mobile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg><span class="sr-only">Mobile</span></button>
+    </div>
+    <button id="new-project" class="ghost">New</button>
+    <button id="open-project" class="ghost">Open</button>
+    <button id="preview" class="ghost">Preview</button>
+    <button id="download" class="gold">Download <span aria-hidden="true">↧</span></button>
+  </div>
+</header>
+
+<div class="workspace">
+  <aside class="tools" aria-label="Design tools">
+    <div class="tool-tabs" role="tablist" aria-label="Studio tools">
+      <button role="tab" id="tab-add" aria-controls="pane-add" aria-selected="true" data-tab="add">Add</button>
+      <button role="tab" id="tab-layers" aria-controls="pane-layers" aria-selected="false" tabindex="-1" data-tab="layers">Layers</button>
+      <button role="tab" id="tab-theme" aria-controls="pane-theme" aria-selected="false" tabindex="-1" data-tab="theme">Theme</button>
+      <button role="tab" id="tab-assistant" aria-controls="pane-assistant" aria-selected="false" tabindex="-1" data-tab="assistant">✦ AI</button>
+    </div>
+
+    <section id="pane-add" class="pane" role="tabpanel" aria-labelledby="tab-add">
+      <div class="pane-head"><h2>Building blocks</h2><p>Click to add, or drag onto the canvas. Double-click text to write.</p></div>
+      <div id="blocks"></div>
+      <button class="wide secondary" id="edit-code">&lt;/&gt; Edit HTML &amp; CSS</button>
+    </section>
+
+    <section id="pane-layers" class="pane" role="tabpanel" aria-labelledby="tab-layers" hidden>
+      <div class="pane-head"><h2>Page structure</h2><p>Select, hide and drag to reorder elements.</p></div>
+      <div id="layers"></div>
+    </section>
+
+    <section id="pane-theme" class="pane" role="tabpanel" aria-labelledby="tab-theme" hidden>
+      <div class="pane-head"><h2>Page theme</h2><p>Quick starting points for colour and type. Fine-tune anything afterwards.</p></div>
+      <h3 class="mini-title">Colours</h3>
+      <div class="swatches" id="palettes"></div>
+      <h3 class="mini-title">Fonts</h3>
+      <div class="font-list" id="fonts"></div>
+      <p class="helper">Themes change the page background, text colour and font. Elements you’ve styled individually keep their own settings.</p>
+    </section>
+
+    <section id="pane-assistant" class="pane" role="tabpanel" aria-labelledby="tab-assistant" hidden>
+      <div class="pane-head"><h2>You lead. AI suggests.</h2><p>Get ideas for structure, spacing and hierarchy. Nothing changes until you choose.</p></div>
+      <label class="field">What are you aiming for?<textarea id="project-brief" rows="4" maxlength="4000" placeholder="A calm portfolio for my photography, with large images and a short introduction…"></textarea></label>
+      <label class="field">Ask a design question<textarea id="ai-prompt" rows="3" maxlength="1500" placeholder="How could I arrange the introduction and gallery?"></textarea></label>
+      <div class="chips" id="prompt-chips">
+        <button type="button">What should my first section say?</button>
+        <button type="button">How can I make this feel more premium?</button>
+        <button type="button">How should this look on mobile?</button>
+      </div>
+      <button id="ask-ai" class="gold wide" disabled>✦ Suggest ideas</button>
+      <p id="ai-status" class="helper" role="status">Checking AI availability…</p>
+      <div id="ai-results" aria-live="polite"></div>
+      <p class="helper small">When you ask, your brief and a text outline of the page are sent to the AI assistant.</p>
+    </section>
+
+    <div class="tool-foot"><button id="shortcuts-btn" class="link">Keyboard shortcuts</button><button id="help" class="icon-btn" aria-label="Studio help">?</button></div>
+  </aside>
+
+  <main class="canvas-main">
+    <div id="canvas-shell">
+      <div id="gjs"></div>
+      <div class="blank-guide" id="blank-guide">
+        <div class="blank-card">
+          <span class="blank-symbol" aria-hidden="true">+</span>
+          <h1>Yours to imagine.</h1>
+          <p>Drag a block from the left, or start with one of these.</p>
+          <div class="blank-actions">
+            <button class="gold" data-quick="section">Add a section</button>
+            <button class="ghost-dark" data-quick="heading">Add a heading</button>
+            <button class="ghost-dark" id="blank-ai">✦ Get AI ideas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="canvas-foot"><span id="project-mode" class="mode-tag">New website</span><span id="selected-status">Nothing selected</span></div>
+  </main>
+
+  <aside class="inspector" aria-label="Element settings">
+    <div class="inspector-head">
+      <p class="eyebrow">Selected</p>
+      <h2 id="selected-name">Page</h2>
+      <div class="selection-actions">
+        <button id="select-parent" title="Select parent element">↑ Parent</button>
+        <button id="duplicate" title="Duplicate (Ctrl+D)">Duplicate</button>
+        <button id="remove" class="danger" title="Delete (Del)">Delete</button>
+      </div>
+    </div>
+    <div class="element-controls">
+      <label class="field" id="text-control" hidden>Text<textarea id="element-text" rows="3"></textarea><button id="apply-text" class="secondary">Update text</button></label>
+      <label class="field" id="link-control" hidden>Link destination<input id="element-link" type="text" placeholder="https://example.com or #section"><button id="apply-link" class="secondary">Update link</button></label>
+      <div id="image-control" hidden><label class="field">Image description (alt text)<input id="image-alt" maxlength="250"></label><button id="replace-image" class="secondary wide">Upload / replace image</button></div>
+    </div>
+    <div id="style-manager"></div>
+    <div id="traits"></div>
+  </aside>
+</div>
+
+<dialog id="start-dialog" class="start-dialog" aria-labelledby="start-title">
+  <button class="dialog-close" id="close-start" aria-label="Back to current website" hidden>×</button>
+  <div class="start-side">
+    <a href="/" class="brand"><span class="brand-mark"></span>oakline<small>studio</small></a>
+    <p class="start-quote" aria-hidden="true">“Every website<br>starts with<br><em>an idea.</em>”</p>
+  </div>
+  <div class="start-main">
+    <h1 id="start-title">What would you<br><em>like to create?</em></h1>
+    <div id="restore-box" class="restore" hidden>
+      <div><strong>Pick up where you left off</strong><span id="restore-meta"></span></div>
+      <button type="button" class="gold" id="restore-btn">Continue editing</button>
+    </div>
+    <form id="start-form">
+      <fieldset class="project-choices"><legend class="sr-only">Project type</legend>
+        <label class="project-choice"><input type="radio" name="project-kind" value="new" checked><span class="choice-icon">+</span><strong>New website</strong><span>Start on an open canvas</span></label>
+        <label class="project-choice"><input type="radio" name="project-kind" value="existing"><span class="choice-icon">↥</span><strong>Edit existing</strong><span>Open HTML or an Oakline project</span></label>
+      </fieldset>
+      <label class="field">Website name<input id="start-name" autofocus maxlength="80" placeholder="My next great idea" autocomplete="off"></label>
+      <label class="field"><span id="aim-label">What do you want to make?</span><textarea id="start-brief" rows="3" maxlength="4000" placeholder="What it's for, who it's for, and how it should feel. You can add this later."></textarea></label>
+      <div id="existing-options" hidden>
+        <label class="field">Choose a file<input id="start-file" type="file" accept=".html,.htm,.json,text/html,application/json"></label>
+        <p class="helper">HTML files or Oakline projects. Scripts, forms and external embeds are removed for safe visual editing.</p>
+      </div>
+      <p id="start-error" class="error" role="alert"></p>
+      <button type="submit" class="gold wide big" id="start-submit">Open my canvas <span aria-hidden="true">→</span></button>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="export-dialog" aria-labelledby="export-title">
+  <button class="dialog-close" aria-label="Close downloads">×</button>
+  <h2 id="export-title">Take it <em>with you.</em></h2>
+  <button class="export-option" id="export-html"><span class="eo-icon" aria-hidden="true">↧</span><span><strong>Download website</strong><small>One HTML file with your styles and images. Upload it to any host.</small></span></button>
+  <button class="export-option" id="export-project"><span class="eo-icon" aria-hidden="true">◇</span><span><strong>Save editable project</strong><small>A .oakline.json file you can reopen here on any device.</small></span></button>
+  <p class="helper">Your latest work is also autosaved in this browser.</p>
+</dialog>
+
+<dialog id="code-dialog" class="code-dialog" aria-labelledby="code-title">
+  <button class="dialog-close" aria-label="Close code editor">×</button>
+  <h2 id="code-title">HTML &amp; CSS</h2>
+  <p class="helper">Changes replace the page content and can be undone. Scripts and external embeds are removed.</p>
+  <div class="code-grid">
+    <label class="field">HTML<textarea id="code-html" rows="18" spellcheck="false"></textarea></label>
+    <label class="field">CSS<textarea id="code-css" rows="18" spellcheck="false"></textarea></label>
+  </div>
+  <p id="code-error" class="error" role="alert"></p>
+  <button class="gold" id="apply-code">Apply to canvas</button>
+</dialog>
+
+<dialog id="preview-dialog" class="preview-dialog" aria-label="Website preview">
+  <div class="preview-toolbar">
+    <strong id="preview-title">Website preview</strong>
+    <div class="devices" role="group" aria-label="Preview width">
+      <button data-preview="100%" aria-pressed="true">Desktop</button><button data-preview="768px" aria-pressed="false">Tablet</button><button data-preview="390px" aria-pressed="false">Mobile</button>
+    </div>
+    <button class="dialog-close" aria-label="Close preview">×</button>
+  </div>
+  <div class="preview-stage"><iframe id="preview-frame" title="Your website preview" sandbox="" referrerpolicy="no-referrer"></iframe></div>
+</dialog>
+
+<dialog id="help-dialog" aria-labelledby="help-title">
+  <button class="dialog-close" aria-label="Close help">×</button>
+  <h2 id="help-title">Make it your own.</h2>
+  <ol class="help-list">
+    <li>Click or drag blocks from <strong>Add</strong> onto the canvas.</li>
+    <li>Drag elements to move them, or reorder in <strong>Layers</strong>.</li>
+    <li>Double-click text to write. Select anything to style it on the right.</li>
+    <li>Use <strong>Theme</strong> for quick colours and fonts, and <strong>✦ AI</strong> for layout ideas.</li>
+    <li><strong>Download</strong> your website, and save an editable project as a backup.</li>
+  </ol>
+  <h3 class="mini-title">Keyboard shortcuts</h3>
+  <dl class="shortcuts">
+    <dt><kbd>Ctrl</kbd> <kbd>Z</kbd></dt><dd>Undo</dd>
+    <dt><kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Z</kbd></dt><dd>Redo</dd>
+    <dt><kbd>Ctrl</kbd> <kbd>D</kbd></dt><dd>Duplicate selected</dd>
+    <dt><kbd>Del</kbd></dt><dd>Delete selected</dd>
+    <dt><kbd>Ctrl</kbd> <kbd>S</kbd></dt><dd>Save editable project</dd>
+    <dt><kbd>Ctrl</kbd> <kbd>P</kbd></dt><dd>Preview</dd>
+    <dt><kbd>Esc</kbd></dt><dd>Select parent</dd>
+  </dl>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="image-file" accept="image/png,image/jpeg,image/webp" hidden>
+<div class="small-screen"><span class="brand-mark" aria-hidden="true"></span><h1>The studio needs a<br><em>bigger screen.</em></h1><p>Open Oakline on a laptop or desktop to design your website. Tablets in landscape work too.</p><div class="blank-actions"><a class="gold" href="/">Back to Oakline</a><button class="ghost-dark" id="small-continue">Continue anyway</button></div></div>
+</body>
+</html>

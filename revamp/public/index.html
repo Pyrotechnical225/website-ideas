@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2419">
+<title>Oakline Creator — Build the website you imagined</title>
+<meta name="description" content="Oakline Creator is a blank-canvas website builder with optional AI layout ideas. Describe your idea, design it your way, and download a website you own.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/home.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <nav class="nav wrap" aria-label="Main">
+    <a class="logo" href="/" aria-label="Oakline Creator home"><span class="logo-mark" aria-hidden="true"></span>oakline<small>creator</small></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links"><span class="sr-only">Menu</span><span aria-hidden="true"></span></button>
+    <div class="nav-links" id="nav-links">
+      <a href="#features">Features</a>
+      <a href="#ai">AI ideas</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="/studio" class="btn btn-gold btn-sm">Open the studio <span aria-hidden="true">→</span></a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="dot" aria-hidden="true"></span>Blank canvas · AI ideas · Yours to download</p>
+        <h1>Build the website<br><em>you imagined.</em></h1>
+        <p class="lead">Describe your idea, then shape it with drag-and-drop tools on an open canvas. Ask AI for layout ideas when you want a second opinion — you stay in charge of every detail.</p>
+
+        <form class="idea-bar" id="idea-form" aria-label="Start your website">
+          <label for="idea-brief" class="sr-only">What do you want to create?</label>
+          <textarea id="idea-brief" rows="2" maxlength="4000" placeholder="A photography portfolio with big images, a short story about me and an easy way to get in touch…"></textarea>
+          <input id="idea-name" type="hidden">
+          <div class="idea-actions">
+            <button type="submit" class="btn btn-gold" name="mode" value="new">Start a new website <span aria-hidden="true">→</span></button>
+            <button type="submit" class="btn btn-ghost" name="mode" value="existing">Edit an existing one</button>
+          </div>
+        </form>
+        <ul class="hero-points" aria-label="Highlights">
+          <li>No coding needed</li><li>No forced templates</li><li>Free to start</li>
+        </ul>
+      </div>
+
+      <!-- Animated product preview -->
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><span></span><span></span><span></span><em>oakline.studio / my-bakery</em></div>
+        <div class="mock-body">
+          <div class="mock-rail">
+            <i>▱</i><i>H</i><i>T</i><i>▧</i><i>↗</i><i>Ⅱ</i>
+          </div>
+          <div class="mock-canvas">
+            <div class="m-nav"><b></b><span></span><span></span><span></span></div>
+            <div class="m-hero">
+              <div class="m-h1">Fresh bread,<br><em>baked at dawn.</em></div>
+              <div class="m-p"></div><div class="m-p short"></div>
+              <div class="m-btn">Order today</div>
+            </div>
+            <div class="m-img"></div>
+            <div class="m-cols"><div></div><div></div><div></div></div>
+            <div class="m-cursor"></div>
+          </div>
+          <div class="mock-ai">
+            <p class="m-ai-label">✦ AI idea</p>
+            <p class="m-ai-title">Lead with a big photo</p>
+            <p class="m-ai-text">Put your best loaf on top, then three short reasons to visit.</p>
+            <span class="m-ai-btn">Add empty 3 columns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Blank canvas</span><span>Drag &amp; drop</span><span>AI layout ideas</span><span>Desktop · tablet · mobile</span><span>Edit HTML &amp; CSS</span><span>Import your site</span><span>Autosave</span><span>Download &amp; keep</span>
+        <span>Blank canvas</span><span>Drag &amp; drop</span><span>AI layout ideas</span><span>Desktop · tablet · mobile</span><span>Edit HTML &amp; CSS</span><span>Import your site</span><span>Autosave</span><span>Download &amp; keep</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section light" id="features">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Everything you need</p>
+        <h2>Your ideas lead.<br><em>The tools keep up.</em></h2>
+        <p>Start from nothing, or bring a site you already have. Every element is yours to move, restyle and rewrite.</p>
+      </div>
+
+      <div class="bento">
+        <article class="card card-lg reveal">
+          <div class="card-art art-canvas" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span></div>
+          <h3>A truly blank canvas</h3>
+          <p>No template gallery to pick from. Drag sections, headings, images, buttons and columns exactly where you want them.</p>
+        </article>
+        <article class="card card-dark reveal">
+          <span class="card-icon" aria-hidden="true">✦</span>
+          <h3>AI that suggests, never takes over</h3>
+          <p>Ask for layout and format ideas based on your brief. Nothing changes on your page until you choose it.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-art art-devices" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h3>Looks right on every screen</h3>
+          <p>Switch between desktop, tablet and mobile and fine-tune each one.</p>
+        </article>
+        <article class="card reveal">
+          <span class="card-icon" aria-hidden="true">⟳</span>
+          <h3>Autosaves as you go</h3>
+          <p>Your work is kept in this browser, so a closed tab doesn’t mean lost work.</p>
+        </article>
+        <article class="card reveal">
+          <span class="card-icon" aria-hidden="true">&lt;/&gt;</span>
+          <h3>Code when you want it</h3>
+          <p>Open the HTML and CSS at any point. Import an existing HTML page to keep editing.</p>
+        </article>
+        <article class="card card-gold reveal">
+          <span class="card-icon" aria-hidden="true">↧</span>
+          <h3>Download it. Own it.</h3>
+          <p>Export one clean HTML file, plus an editable project to pick up later. No lock-in, no watermark.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI -->
+  <section class="section dark" id="ai">
+    <div class="wrap split">
+      <div class="reveal">
+        <p class="eyebrow gold">AI layout ideas</p>
+        <h2>A second pair of eyes,<br><em>on your terms.</em></h2>
+        <p>Stuck on how to arrange things? Tell the assistant what you’re going for. It reads your brief and page outline, then offers two or three directions with clear steps.</p>
+        <ul class="checks">
+          <li>Ideas are based on your own goals — not a stock template</li>
+          <li>Add an optional empty structure with one click</li>
+          <li>Your page is never changed without your say-so</li>
+        </ul>
+        <a class="btn btn-gold" href="/studio">Try it in the studio <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="chat reveal" aria-label="Example of an AI suggestion">
+        <div class="chat-msg user">I’m making a site for my dog-walking business. How should the top of the page look?</div>
+        <div class="chat-msg ai">
+          <p class="chat-label">✦ Direction 1 · Friendly and local</p>
+          <strong>Open with a warm photo and one clear promise</strong>
+          <ol><li>Use a full-width section with a large image of a happy walk.</li><li>Keep the headline under eight words.</li><li>Add one button: “Book a walk”.</li></ol>
+          <span class="chat-btn">Add an empty section</span>
+        </div>
+        <div class="chat-msg ai faded">
+          <p class="chat-label">✦ Direction 2 · Trust first</p>
+          <strong>Lead with three quick reasons to choose you</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section light" id="how">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2>From first idea to<br><em>your own website.</em></h2>
+      </div>
+      <ol class="steps">
+        <li class="reveal"><span class="step-n">01</span><h3>Describe it</h3><p>Choose a new website or import an existing one, and say what you’re aiming for.</p></li>
+        <li class="reveal"><span class="step-n">02</span><h3>Design it</h3><p>Add elements, drag them into place and style every detail. Ask AI for ideas whenever you like.</p></li>
+        <li class="reveal"><span class="step-n">03</span><h3>Download it</h3><p>Preview on any screen size, then export your HTML and upload it to any hosting provider.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section cream" id="pricing">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Pricing</p>
+        <h2>Start free.<br><em>Grow when you’re ready.</em></h2>
+        <div class="billing-toggle" role="group" aria-label="Billing period">
+          <button type="button" data-billing="monthly" aria-pressed="true">Monthly</button>
+          <button type="button" data-billing="yearly" aria-pressed="false">Yearly <span class="save">Save 21%</span></button>
+        </div>
+      </div>
+      <div class="plans">
+        <article class="plan reveal">
+          <h3>Free</h3>
+          <p class="price"><span>£0</span></p>
+          <p class="plan-sub">Everything you need to design and download.</p>
+          <a class="btn btn-dark" href="/studio">Start creating</a>
+          <ul class="checks">
+            <li>Blank canvas and all design tools</li>
+            <li>HTML &amp; CSS editing and HTML import</li>
+            <li>Desktop, tablet and mobile preview</li>
+            <li>Unlimited downloads, no watermark</li>
+            <li>25 Luna AI ideas a month</li>
+          </ul>
+        </article>
+        <article class="plan plan-pro reveal">
+          <p class="badge">Coming soon</p>
+          <h3>Pro</h3>
+          <p class="price"><span data-price>£19</span><small data-period>/month</small></p>
+          <p class="plan-sub" data-billing-note>Billed monthly. Cancel any time.</p>
+          <button class="btn btn-gold" type="button" disabled>Launching soon</button>
+          <ul class="checks">
+            <li>Everything in Free</li>
+            <li>1,000 Luna + 100 Sol AI requests a month</li>
+            <li>25 cloud projects, 25 pages each</li>
+            <li>30-day version history</li>
+            <li>Reusable components and brand settings</li>
+            <li>Priority email support</li>
+          </ul>
+        </article>
+      </div>
+      <p class="fine">Pro, accounts and cloud saving are still being built. AI allowances are planned and will be confirmed at launch.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section light" id="faq">
+    <div class="wrap faq">
+      <div class="reveal">
+        <p class="eyebrow">Questions</p>
+        <h2>Good questions.<br><em>Simple answers.</em></h2>
+      </div>
+      <div class="faq-list reveal">
+        <details open><summary>Do I have to pick a template?</summary><p>No. New projects start on an empty canvas. You choose every element, the structure, the content and the style.</p></details>
+        <details><summary>Do I need to know how to code?</summary><p>No. Everything works with clicks and drag-and-drop. If you do know code, you can edit the HTML and CSS directly.</p></details>
+        <details><summary>How does the AI help?</summary><p>It reads your project brief and a text outline of your page, then suggests layout directions with simple steps. It never edits your page on its own — you can add a suggested empty structure if you want one.</p></details>
+        <details><summary>Can I edit a website I already have?</summary><p>Yes. Choose “Edit an existing website” and upload its HTML file or a saved Oakline project. For safety, scripts, forms, embeds and external stylesheets are removed, so you may need to re-add some styles and images.</p></details>
+        <details><summary>Is my work saved?</summary><p>The studio autosaves your latest work in this browser. To move between devices or keep a backup, download the editable project file. Cloud saving arrives with accounts.</p></details>
+        <details><summary>Does Oakline host my website?</summary><p>Not yet. You download your website as an HTML file and can upload it to any hosting provider you like.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap cta-inner reveal">
+      <h2>You’ve got the idea.<br><em>Let’s make it a website.</em></h2>
+      <a class="btn btn-gold btn-lg" href="/studio">Open the studio <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <a class="logo" href="/" aria-label="Oakline Creator home"><span class="logo-mark" aria-hidden="true"></span>oakline<small>creator</small></a>
+    <nav aria-label="Footer"><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/studio">Studio</a></nav>
+    <p>© <span id="year">2026</span> Oakline Creator</p>
+  </div>
+</footer>
+<script src="/home.js" defer></script>
+</body>
+</html>
