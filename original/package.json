@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-worker.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "grapesjs": "^0.23.6",
+    "dompurify": "^3.4.15"
+  }
+}
