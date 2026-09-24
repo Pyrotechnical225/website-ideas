@@ -25,13 +25,25 @@ document.getElementById('idea-brief').addEventListener('keydown',e=>{if(e.key===
 // Pricing toggle
 const prices={monthly:{price:'£19',period:'/month',note:'Billed monthly. Cancel any time.'},yearly:{price:'£15',period:'/month',note:'£180 billed once a year — save £48.'}};
 document.querySelectorAll('[data-billing]').forEach(button=>button.addEventListener('click',()=>{
-  const p=prices[button.dataset.billing];
+  const p=prices[button.dataset.billing];billingInterval=button.dataset.billing==='yearly'?'year':'month';
   document.querySelectorAll('[data-billing]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
   document.querySelector('[data-price]').textContent=p.price;
   document.querySelector('[data-period]').textContent=p.period;
   document.querySelector('[data-billing-note]').textContent=p.note;
 }));
 
+// Live settings: show sign-in and enable Pro checkout only when the site owner has switched them on
+let billingInterval='month';
+fetch('/api/config',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(config=>{
+  if(!config)return;
+  if(config.accounts)document.getElementById('nav-signin').hidden=false;
+  if(config.billing){
+    const cta=document.getElementById('pro-cta');cta.disabled=false;cta.textContent='Upgrade to Pro';
+    cta.addEventListener('click',()=>{location.href='/studio?upgrade='+billingInterval;});
+    document.getElementById('pro-badge').textContent='Most popular';
+    document.getElementById('pricing-fine').textContent='Cancel any time from your account.';
+  }
+}).catch(()=>{});
 document.getElementById('year').textContent=new Date().getFullYear();
 
 // Scroll reveal

@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="/creator.css">
 <script src="/vendor/purify.min.js" defer></script>
 <script src="/vendor/grapes.min.js" defer></script>
+<script src="/vendor/fflate.js" defer></script>
+<script src="/vendor/supabase.js" defer></script>
+<script src="/cloud.js" defer></script>
 <script src="/creator.js" defer></script>
 </head>
 <body>
@@ -33,6 +36,7 @@
     <button id="new-project" class="ghost">New</button>
     <button id="open-project" class="ghost">Open</button>
     <button id="preview" class="ghost">Preview</button>
+    <button id="account-btn" class="account-btn" hidden><span class="avatar" aria-hidden="true"></span><span id="account-label">Sign in</span></button>
     <button id="download" class="gold">Download <span aria-hidden="true">↧</span></button>
   </div>
 </header>
@@ -41,6 +45,7 @@
   <aside class="tools" aria-label="Design tools">
     <div class="tool-tabs" role="tablist" aria-label="Studio tools">
       <button role="tab" id="tab-add" aria-controls="pane-add" aria-selected="true" data-tab="add">Add</button>
+      <button role="tab" id="tab-pages" aria-controls="pane-pages" aria-selected="false" tabindex="-1" data-tab="pages">Pages</button>
       <button role="tab" id="tab-layers" aria-controls="pane-layers" aria-selected="false" tabindex="-1" data-tab="layers">Layers</button>
       <button role="tab" id="tab-theme" aria-controls="pane-theme" aria-selected="false" tabindex="-1" data-tab="theme">Theme</button>
       <button role="tab" id="tab-assistant" aria-controls="pane-assistant" aria-selected="false" tabindex="-1" data-tab="assistant">✦ AI</button>
@@ -50,6 +55,14 @@
       <div class="pane-head"><h2>Building blocks</h2><p>Click to add, or drag onto the canvas. Double-click text to write.</p></div>
       <div id="blocks"></div>
       <button class="wide secondary" id="edit-code">&lt;/&gt; Edit HTML &amp; CSS</button>
+    </section>
+
+    <section id="pane-pages" class="pane" role="tabpanel" aria-labelledby="tab-pages" hidden>
+      <div class="pane-head"><h2>Pages</h2><p>Each page becomes its own file when you download. The first page is your homepage.</p></div>
+      <ul class="page-list" id="page-list"></ul>
+      <form class="add-page" id="add-page-form"><label class="sr-only" for="new-page-name">New page name</label><input id="new-page-name" maxlength="40" placeholder="New page name, e.g. About"><button class="secondary" id="add-page">+ Add</button></form>
+      <p class="helper" id="page-limit"></p>
+      <p class="helper">To link pages together, select a button or link and choose a page under “Link destination”.</p>
     </section>
 
     <section id="pane-layers" class="pane" role="tabpanel" aria-labelledby="tab-layers" hidden>
@@ -75,6 +88,11 @@
         <button type="button">How can I make this feel more premium?</button>
         <button type="button">How should this look on mobile?</button>
       </div>
+      <fieldset class="model-switch" id="model-switch"><legend class="sr-only">AI model</legend>
+        <label><input type="radio" name="ai-model" value="luna" checked><span><strong>Luna</strong><small>Quick ideas</small></span></label>
+        <label><input type="radio" name="ai-model" value="sol"><span><strong>Sol</strong><small>Deeper thinking · Pro</small></span></label>
+      </fieldset>
+      <p class="ai-balance" id="ai-balance" hidden></p>
       <button id="ask-ai" class="gold wide" disabled>✦ Suggest ideas</button>
       <p id="ai-status" class="helper" role="status">Checking AI availability…</p>
       <div id="ai-results" aria-live="polite"></div>
@@ -100,7 +118,7 @@
         </div>
       </div>
     </div>
-    <div class="canvas-foot"><span id="project-mode" class="mode-tag">New website</span><span id="selected-status">Nothing selected</span></div>
+    <div class="canvas-foot"><span id="project-mode" class="mode-tag">New website</span><span id="current-page" class="current-page"></span><span id="selected-status">Nothing selected</span></div>
   </main>
 
   <aside class="inspector" aria-label="Element settings">
@@ -115,7 +133,7 @@
     </div>
     <div class="element-controls">
       <label class="field" id="text-control" hidden>Text<textarea id="element-text" rows="3"></textarea><button id="apply-text" class="secondary">Update text</button></label>
-      <label class="field" id="link-control" hidden>Link destination<input id="element-link" type="text" placeholder="https://example.com or #section"><button id="apply-link" class="secondary">Update link</button></label>
+      <label class="field" id="link-control" hidden>Link destination<input id="element-link" type="text" placeholder="https://example.com or #section"><select id="link-page" aria-label="Link to one of your pages"><option value="">Link to one of your pages…</option></select><button id="apply-link" class="secondary">Update link</button></label>
       <div id="image-control" hidden><label class="field">Image description (alt text)<input id="image-alt" maxlength="250"></label><button id="replace-image" class="secondary wide">Upload / replace image</button></div>
     </div>
     <div id="style-manager"></div>
@@ -135,6 +153,11 @@
       <div><strong>Pick up where you left off</strong><span id="restore-meta"></span></div>
       <button type="button" class="gold" id="restore-btn">Continue editing</button>
     </div>
+    <div id="cloud-box" class="cloud-box" hidden>
+      <div class="cloud-head"><strong>Your projects</strong><span id="cloud-count"></span></div>
+      <ul id="cloud-list" class="cloud-list"></ul>
+    </div>
+    <p id="signin-hint" class="signin-hint" hidden><button type="button" class="link" id="start-signin">Sign in</button> to save your websites to your account and open them on any device.</p>
     <form id="start-form">
       <fieldset class="project-choices"><legend class="sr-only">Project type</legend>
         <label class="project-choice"><input type="radio" name="project-kind" value="new" checked><span class="choice-icon">+</span><strong>New website</strong><span>Start on an open canvas</span></label>
@@ -155,9 +178,9 @@
 <dialog id="export-dialog" aria-labelledby="export-title">
   <button class="dialog-close" aria-label="Close downloads">×</button>
   <h2 id="export-title">Take it <em>with you.</em></h2>
-  <button class="export-option" id="export-html"><span class="eo-icon" aria-hidden="true">↧</span><span><strong>Download website</strong><small>One HTML file with your styles and images. Upload it to any host.</small></span></button>
+  <button class="export-option" id="export-html"><span class="eo-icon" aria-hidden="true">↧</span><span><strong>Download website</strong><small id="export-html-note">One HTML file with your styles and images. Upload it to any host.</small></span></button>
   <button class="export-option" id="export-project"><span class="eo-icon" aria-hidden="true">◇</span><span><strong>Save editable project</strong><small>A .oakline.json file you can reopen here on any device.</small></span></button>
-  <p class="helper">Your latest work is also autosaved in this browser.</p>
+  <p class="helper" id="export-note">Your latest work is also autosaved in this browser.</p>
 </dialog>
 
 <dialog id="code-dialog" class="code-dialog" aria-labelledby="code-title">
@@ -203,6 +226,54 @@
     <dt><kbd>Ctrl</kbd> <kbd>P</kbd></dt><dd>Preview</dd>
     <dt><kbd>Esc</kbd></dt><dd>Select parent</dd>
   </dl>
+</dialog>
+
+<dialog id="auth-dialog" class="auth-dialog" aria-labelledby="auth-title">
+  <button class="dialog-close" aria-label="Close">×</button>
+  <h2 id="auth-title">Welcome <em>back.</em></h2>
+  <div class="auth-tabs" role="tablist" id="auth-tabs">
+    <button type="button" role="tab" data-auth="signin" aria-selected="true">Sign in</button>
+    <button type="button" role="tab" data-auth="signup" aria-selected="false">Create account</button>
+  </div>
+  <p id="auth-intro" class="helper" hidden></p>
+  <form id="auth-form" novalidate>
+    <label class="field" id="auth-email-field">Email<input id="auth-email" type="email" autocomplete="email" required maxlength="254"></label>
+    <label class="field" id="auth-password-field">Password<input id="auth-password" type="password" autocomplete="current-password" minlength="8" required></label>
+    <p id="auth-error" class="error" role="alert"></p>
+    <p id="auth-message" class="auth-message" role="status" hidden></p>
+    <button type="submit" class="gold wide big" id="auth-submit">Sign in</button>
+  </form>
+  <div class="auth-links"><button type="button" class="link" id="auth-forgot">Forgot your password?</button><button type="button" class="link" id="auth-resend" hidden>Resend confirmation email</button></div>
+</dialog>
+
+<dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title">
+  <button class="dialog-close" aria-label="Close">×</button>
+  <p class="eyebrow">Your account</p>
+  <h2 id="account-title"><span id="account-email"></span></h2>
+  <p class="plan-line"><span class="plan-badge" id="plan-badge">Free</span><span id="plan-detail"></span></p>
+  <p class="warn" id="verify-warning" hidden>Please confirm your email address to use AI suggestions and upgrade. <button type="button" class="link" id="account-resend">Resend the email</button></p>
+  <div class="meters">
+    <div class="meter"><div class="meter-top"><strong>Luna AI</strong><span id="luna-text"></span></div><div class="bar"><span id="luna-bar"></span></div></div>
+    <div class="meter"><div class="meter-top"><strong>Sol AI</strong><span id="sol-text"></span></div><div class="bar"><span id="sol-bar"></span></div></div>
+    <div class="meter"><div class="meter-top"><strong>Cloud projects</strong><span id="projects-text"></span></div><div class="bar"><span id="projects-bar"></span></div></div>
+  </div>
+  <p class="helper" id="reset-note"></p>
+  <div class="upgrade" id="upgrade-box" hidden>
+    <strong>Upgrade to Pro</strong>
+    <p>1,000 Luna + 100 Sol requests a month, 25 projects with 25 pages each.</p>
+    <div class="upgrade-actions"><button class="gold" data-upgrade="month">£19 / month</button><button class="secondary" data-upgrade="year">£180 / year <small>save £48</small></button></div>
+  </div>
+  <p class="error" id="account-error" role="alert"></p>
+  <div class="account-actions"><button class="secondary" id="manage-billing" hidden>Manage billing</button><button class="secondary" id="sign-out">Sign out</button></div>
+</dialog>
+
+<dialog id="recovery-dialog" aria-labelledby="recovery-title">
+  <h2 id="recovery-title">Choose a <em>new password.</em></h2>
+  <form id="recovery-form">
+    <label class="field">New password<input id="recovery-password" type="password" autocomplete="new-password" minlength="8" required></label>
+    <p id="recovery-error" class="error" role="alert"></p>
+    <button class="gold wide big" type="submit">Save password</button>
+  </form>
 </dialog>
 
 <div id="toast" role="status" aria-live="polite"></div>
