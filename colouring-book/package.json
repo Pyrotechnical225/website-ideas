@@ -3,7 +3,9 @@
   "scripts": {
     "build": "node src/build.mjs",
     "check": "node src/check.mjs",
-    "preview": "node src/preview.mjs"
+    "preview": "node src/preview.mjs",
+    "book": "node src/make-book.mjs",
+    "books": "node src/make-book.mjs dinosaurs && node src/make-book.mjs farm && node src/make-book.mjs christmas"
   },
   "dependencies": {
     "@fontsource/fredoka": "5.3.0",

@@ -94,8 +94,9 @@ await page.setContent(interiorHtml); await page.evaluate(() => document.fonts.re
 
 // Safety check: every drawing must sit inside the page with at least 0.5 in to spare.
 const tooClose = await page.evaluate(() => [...document.querySelectorAll('body > svg')].map((svg, i) => {
-  const b = svg.querySelector(':scope > *') ? [...svg.children].reduce((acc, el) => { const r = el.getBBox(); return {x1: Math.min(acc.x1, r.x), y1: Math.min(acc.y1, r.y), x2: Math.max(acc.x2, r.x + r.width), y2: Math.max(acc.y2, r.y + r.height)}; }, {x1: 1e9, y1: 1e9, x2: -1e9, y2: -1e9}) : null;
-  return b && (b.x1 < 50 || b.y1 < 50 || b.x2 > 800 || b.y2 > 1050) ? {page: i + 1, ...b} : null;
+  const sr = svg.getBoundingClientRect(), k = 850 / sr.width;
+  const b = [...svg.children].reduce((acc, el) => { const r = el.getBoundingClientRect(); return {x1: Math.min(acc.x1, (r.left - sr.left) * k), y1: Math.min(acc.y1, (r.top - sr.top) * k), x2: Math.max(acc.x2, (r.right - sr.left) * k), y2: Math.max(acc.y2, (r.bottom - sr.top) * k)}; }, {x1: 1e9, y1: 1e9, x2: -1e9, y2: -1e9});
+  return (b.x1 < 50 || b.y1 < 50 || b.x2 > 800 || b.y2 > 1050) ? {page: i + 1, ...b} : null;
 }).filter(Boolean));
 if (tooClose.length) { console.error('Artwork too close to the edge:', tooClose); process.exit(1); }
 

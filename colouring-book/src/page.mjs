@@ -44,6 +44,6 @@ export const outlineText=(text,x,y,size,{weight=700,sw=6,fillc='#fff',anchor='mi
 export const solidText=(text,x,y,size,{weight=600,anchor='middle',color='#000'}={})=>`<path d="${textShape(text,x,y,size,{weight,anchor})}" fill="${color}"/>`;
 export const svgPage=inner=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 1100" width="8.5in" height="11in">${inner}</svg>`;
 export function colouringPage(v){
-  const size=v.label.length>11?84:100;
+  const size=v.label.length>11?Math.min(84,Math.floor(1260/v.label.length)):100;
   return svgPage(outlineText(v.label,425,195,size,{sw:7})+`<g transform="translate(0,${v.shift??55})${v.scale?` translate(425,600) scale(${v.scale}) translate(-425,-600)`:''}">${v.scene}</g>`);
 }

@@ -1,0 +1,11 @@
+{
+  "pages": 64,
+  "trim": "8.5 x 11 in",
+  "bleed": "none (interior)",
+  "spineInches": 0.1441,
+  "coverInches": [
+    17.3941,
+    11.25
+  ],
+  "pictures": 30
+}

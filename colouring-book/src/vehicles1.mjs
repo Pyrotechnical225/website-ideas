@@ -56,7 +56,7 @@ export const ambulance = () => ({label: 'Ambulance', scene:
   wheel(255, 815, 60) + wheel(640, 815, 60) + road()});
 
 export const tractor = () => ({label: 'Tractor', scene:
-  sun(170, 320, 42) + cloud(560, 300, 1) + hill(60, 420, 885, 110) + hill(380, 800, 885, 80) +
+  sun(170, 320, 42) + cloud(560, 300, 1) + hill(70, 420, 885, 110) + hill(380, 780, 885, 80) +
   path('M300,760 L300,600 Q300,580 320,580 L470,580 L470,760 Z', 'cab') + rect(320, 600, 130, 110, 12, 'window', THIN) +
   rect(290, 560, 200, 26, 10, 'roof', THIN) +
   path('M470,760 L470,650 L660,650 Q690,650 690,680 L690,760 Z', 'bonnet') + line('M520,665 L520,745 M560,665 L560,745 M600,665 L600,745', THIN) +
