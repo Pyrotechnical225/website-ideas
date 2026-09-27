@@ -6,7 +6,7 @@ import {snowflake} from '../src/kit2.mjs';
 
 const base = {eye: '#fff', cheek: '#ffb3c1', snow: '#fff', star: '#ffd23f', skin: '#ffd8a8', nose: '#ff8787'};
 export default {
-  slug: 'my-first-christmas', title: 'My First Christmas', coverSubtitle: 'Colouring Book for Toddlers',
+  fileName: 'My First Christmas', slug: 'my-first-christmas', title: 'My First Christmas', coverSubtitle: 'Colouring Book for Toddlers',
   titlePicture: 'christmasTree',
   order: ['fatherChristmas', 'christmasTree', 'snowman', 'reindeer', 'presents', 'stocking', 'gingerbreadMan', 'elf', 'penguin', 'candyCane',
     'bauble', 'sleigh', 'polarBear', 'wreath', 'bigStar', 'robin', 'gingerbreadHouse', 'bells', 'teddyBear', 'hotCocoa',

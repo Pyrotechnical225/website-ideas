@@ -6,7 +6,7 @@ import {withPalette} from '../src/kit.mjs';
 
 const base = {eye: '#fff', cheek: '#ffb3c1', sun: '#ffd23f', cloud: '#fff', leaves: '#5cc16b', trunk: '#a0673c', coconut: '#8a5a2b', rock: '#b8b8b8', belly: '#fff3bf', spot: '#2f9e44', legFar: '#51cf66', body: '#69db7c', tooth: '#fff', lava: '#ff922b', volcano: '#8d6e63', egg: '#fff9db', nest: '#c49a6c'};
 export default {
-  slug: 'dino-friends', title: 'Dino Friends!', coverSubtitle: 'Dinosaur Colouring Book for Toddlers',
+  fileName: 'Dino Friends', slug: 'dino-friends', title: 'Dino Friends!', coverSubtitle: 'Dinosaur Colouring Book for Toddlers',
   titlePicture: 'triceratops',
   order: ['tRex', 'triceratops', 'stegosaurus', 'longNeck', 'pterodactyl', 'hatching', 'ankylosaurus', 'spinosaurus', 'dinoFamily', 'parasaurolophus',
     'velociraptor', 'volcanoPage', 'diplodocus', 'birthday', 'plesiosaurus', 'iguanodon', 'nest', 'dimetrodon', 'rainyDay', 'pachycephalosaurus',

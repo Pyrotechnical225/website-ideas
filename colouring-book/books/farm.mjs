@@ -5,7 +5,7 @@ import {cloud, sun, withPalette} from '../src/kit.mjs';
 
 const base = {eye: '#fff', cheek: '#ffb3c1', sun: '#ffd23f', cloud: '#fff', bubble: '#fff', leaves: '#5cc16b', trunk: '#a0673c', hoof: '#495057', belly: '#fff', grass: '#8ce99a', fence: '#e9c46a', hill: '#8ce99a'};
 export default {
-  slug: 'moo-oink-baa', title: 'Moo! Oink! Baa!', coverSubtitle: 'Farm Animals Colouring Book for Toddlers',
+  fileName: 'Moo Oink Baa', slug: 'moo-oink-baa', title: 'Moo! Oink! Baa!', coverSubtitle: 'Farm Animals Colouring Book for Toddlers',
   titlePicture: 'barn',
   order: ['cow', 'pig', 'sheep', 'hen', 'barn', 'chick', 'duck', 'horse', 'farmTractor', 'goat',
     'donkey', 'rooster', 'cat', 'dog', 'farmer', 'rabbit', 'turkey', 'goose', 'appleTree', 'mouse',

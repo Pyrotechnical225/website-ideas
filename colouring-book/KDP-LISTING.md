@@ -1,6 +1,6 @@
 # Things That Go! Colouring Book: Amazon KDP upload sheet
 
-Upload two files: **`out/interior.pdf`** (manuscript) and **`out/cover.pdf`** (cover). Copy the rest from this sheet.
+Upload two files: **Things That Go - 1 INTERIOR - upload as Manuscript.pdf** and **Things That Go - 2 COVER - upload as Cover.pdf**. Copy the rest from this sheet.
 
 ## Step 1: Paperback details
 
@@ -9,7 +9,7 @@ Upload two files: **`out/interior.pdf`** (manuscript) and **`out/cover.pdf`** (c
 | Language | English |
 | Book title | Things That Go! |
 | Subtitle | Colouring Book for Toddlers: 30 Big & Simple Vehicles to Colour — Diggers, Tractors, Fire Engines, Trains and More (Ages 2–5) |
-| Author | Your name, or a pen name. It must be the same on every book you publish. |
+| Author | Your dad's first and last name (the same on every book) |
 | Description | See below |
 | Publishing rights | "I own the copyright and I hold the necessary publishing rights" |
 | Primary audience | Sexually explicit content: **No**. Reading age: **2 to 5** |
@@ -18,6 +18,7 @@ Upload two files: **`out/interior.pdf`** (manuscript) and **`out/cover.pdf`** (c
 | Large print | Leave unticked |
 
 **Keywords** (one per box):
+
 1. toddler colouring book vehicles
 2. digger colouring book for kids
 3. trucks and tractors colouring book
@@ -55,8 +56,8 @@ Upload two files: **`out/interior.pdf`** (manuscript) and **`out/cover.pdf`** (c
 | Bleed | **No bleed** |
 | Paperback cover finish | **Glossy** (brighter colours for a kids' book) |
 | Reading direction | Left to right |
-| Manuscript | Upload `out/interior.pdf` (64 pages) |
-| Cover | "Upload a cover you already have" → `out/cover.pdf` |
+| Manuscript | Upload **Things That Go - 1 INTERIOR - upload as Manuscript.pdf** (64 pages) |
+| Cover | "Upload a cover you already have" → **Things That Go - 2 COVER - upload as Cover.pdf** |
 | AI-generated content | **Yes** → Images: "Entire work, with minimal or no editing". Text: "Some sections, with minimal or no editing". The pictures and text were created with an AI tool (Claude), so answer honestly. |
 
 Then click **Launch Previewer** and flick through every page before approving.

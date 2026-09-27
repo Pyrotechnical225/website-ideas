@@ -86,7 +86,7 @@ h1{font:700 24pt/1.1 Fredoka,sans-serif;margin:0 0 4px;color:#0b3d5c}h2{font:700
 ol{margin:4px 0;padding-left:20px}.note{background:#fff8e1;border-left:4px solid #ffd23f;padding:8px 12px;border-radius:4px}img{width:100%;border-radius:6px;border:1px solid #dde5ea}</style></head><body>
 <h1>${esc(title)} — KDP upload sheet</h1><p class="sub">${esc(L.subtitle)}</p>
 <img src="data:image/png;base64,__COVER__">
-<h2>Files to upload</h2><table><tr><th>Manuscript</th><td><b>${slug}/interior.pdf</b> — ${PAGES} pages, 8.5 × 11 in, no bleed</td></tr><tr><th>Cover</th><td><b>${slug}/cover.pdf</b> — ${COVER_W} × ${COVER_H} in (spine ${SPINE} in)</td></tr></table>
+<h2>Files to upload</h2><table><tr><th>Manuscript</th><td><b>${book.fileName} - 1 INTERIOR - upload as Manuscript.pdf</b><br>${PAGES} pages, 8.5 × 11 in, no bleed</td></tr><tr><th>Cover</th><td><b>${book.fileName} - 2 COVER - upload as Cover.pdf</b><br>${COVER_W} × ${COVER_H} in (spine ${SPINE} in)</td></tr></table>
 <h2>1 · Paperback details</h2><table>
 <tr><th>Language</th><td>English</td></tr><tr><th>Book title</th><td class="copy">${esc(title)}</td></tr><tr><th>Subtitle</th><td class="copy">${esc(L.subtitle)}</td></tr>
 <tr><th>Series (optional)</th><td class="copy">Big &amp; Simple Colouring for Toddlers — ${esc(L.seriesNumber)}</td></tr>
