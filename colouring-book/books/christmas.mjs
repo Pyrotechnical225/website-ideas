@@ -8,6 +8,7 @@ const base = {eye: '#fff', cheek: '#ffb3c1', snow: '#fff', star: '#ffd23f', skin
 export default {
   fileName: 'My First Christmas', slug: 'my-first-christmas', title: 'My First Christmas', coverSubtitle: 'Colouring Book for Toddlers',
   titlePicture: 'christmasTree',
+  sample: {theme: 'Christmas', pages: ['fatherChristmas', 'snowman', 'reindeer', 'christmasTree', 'gingerbreadMan'], teaser: ['presents', 'penguin', 'elf', 'robin', 'teddyBear', 'gingerbreadHouse'], search: 'My First Christmas Colouring Book for Toddlers'},
   order: ['fatherChristmas', 'christmasTree', 'snowman', 'reindeer', 'presents', 'stocking', 'gingerbreadMan', 'elf', 'penguin', 'candyCane',
     'bauble', 'sleigh', 'polarBear', 'wreath', 'bigStar', 'robin', 'gingerbreadHouse', 'bells', 'teddyBear', 'hotCocoa',
     'mittens', 'toyTrain', 'angel', 'candles', 'snowGlobe', 'toySoldier', 'holly', 'pudding', 'cracker', 'snowflakes'],
